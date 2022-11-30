@@ -11,6 +11,7 @@ public class MapperUtil {
 		contractorDTO.setId(new ContractorId(contractor.getContractorTypeId(), contractor.getContractorNumberId()));
 		contractorDTO.setName(contractor.getName());
 		contractorDTO.setSurname(contractor.getSurname());
+		contractorDTO.setContractorType(contractor.getContractorType().getType());
 		return contractorDTO;
 	}
 

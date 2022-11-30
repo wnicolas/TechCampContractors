@@ -2,10 +2,13 @@ package com.techcamp.models;
 
 import com.techcamp.primarykey.ContractorId;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,17 +29,18 @@ public class Contractor {
 	@Column(name = "SURNAME")
 	private String surname;
 
-	@Column(name = "FK_ID_CONTRACTOR_TYPE")
-	private String contractorType;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "FK_ID_CONTRACTOR_TYPE", referencedColumnName = "ID")
+	private ContractorType contractorType;
 
 	public Contractor(String contractorTypeId, String contractorNumberId, String name, String surname,
-			String contractorType) {
+			int contractorType) {
 		super();
 		this.contractorTypeId = contractorTypeId;
 		this.contractorNumberId = contractorNumberId;
 		this.name = name;
 		this.surname = surname;
-		this.contractorType = contractorType;
+		// this.contractorType = contractorType;
 	}
 
 	public Contractor() {
@@ -75,11 +79,11 @@ public class Contractor {
 		this.surname = surname;
 	}
 
-	public String getContractorType() {
+	public ContractorType getContractorType() {
 		return contractorType;
 	}
 
-	public void setContractorType(String contractorType) {
+	public void setContractorType(ContractorType contractorType) {
 		this.contractorType = contractorType;
 	}
 
